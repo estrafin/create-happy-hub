@@ -62,16 +62,16 @@ function DashboardPage() {
     },
   });
 
-  const done = milestones.filter((m) => m.status === "completed").length;
+  const done = milestones.filter((m) => m.status === "complete").length;
   const pct = milestones.length ? Math.round((done / milestones.length) * 100) : 0;
-  const next = milestones.find((m) => m.status !== "completed");
+  const next = milestones.find((m) => m.status !== "complete");
 
   const kycDone = profile?.kyc_status === "verified";
 
   return (
     <AppShell
       title={`Hello${profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}`}
-      subtitle={role ? `Signed in as ${ROLE_LABELS[role]}` : undefined}
+      subtitle={role ? `Signed in as ${ROLE_LABELS[role]}` : ""}
     >
       <div className="space-y-6">
         {!kycDone ? (
@@ -241,7 +241,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Member({ label, name }: { label: string; name?: string | null }) {
+function Member({ label, name }: { label: string; name?: string | null | undefined }) {
   return (
     <li className="flex items-center justify-between gap-3">
       <span className="text-muted-foreground">{label}</span>
