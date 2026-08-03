@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AppointmentsRouteImport } from './routes/appointments'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as MatchesRouteImport } from './routes/matches'
+import { Route as MessagesRouteImport } from './routes/messages'
+import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as VerificationRouteImport } from './routes/verification'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppointmentsRoute = AppointmentsRouteImport.update({
+  id: '/appointments',
+  path: '/appointments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -28,35 +46,131 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchesRoute = MatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerificationRoute = VerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/journey': typeof JourneyRoute
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
+  '/verification': typeof VerificationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/journey': typeof JourneyRoute
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
+  '/verification': typeof VerificationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/journey': typeof JourneyRoute
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
+  '/verification': typeof VerificationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/appointments'
+    | '/auth'
+    | '/dashboard'
+    | '/documents'
+    | '/journey'
+    | '/matches'
+    | '/messages'
+    | '/payments'
+    | '/verification'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard'
-  id: '__root__' | '/' | '/auth' | '/dashboard'
+  to:
+    | '/'
+    | '/admin'
+    | '/appointments'
+    | '/auth'
+    | '/dashboard'
+    | '/documents'
+    | '/journey'
+    | '/matches'
+    | '/messages'
+    | '/payments'
+    | '/verification'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/appointments'
+    | '/auth'
+    | '/dashboard'
+    | '/documents'
+    | '/journey'
+    | '/matches'
+    | '/messages'
+    | '/payments'
+    | '/verification'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AppointmentsRoute: typeof AppointmentsRoute
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
+  DocumentsRoute: typeof DocumentsRoute
+  JourneyRoute: typeof JourneyRoute
+  MatchesRoute: typeof MatchesRoute
+  MessagesRoute: typeof MessagesRoute
+  PaymentsRoute: typeof PaymentsRoute
+  VerificationRoute: typeof VerificationRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +180,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appointments': {
+      id: '/appointments'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof AppointmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -82,13 +210,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matches': {
+      id: '/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verification': {
+      id: '/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof VerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AppointmentsRoute: AppointmentsRoute,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
+  DocumentsRoute: DocumentsRoute,
+  JourneyRoute: JourneyRoute,
+  MatchesRoute: MatchesRoute,
+  MessagesRoute: MessagesRoute,
+  PaymentsRoute: PaymentsRoute,
+  VerificationRoute: VerificationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
