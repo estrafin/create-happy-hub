@@ -17,6 +17,7 @@ import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as MessagesRouteImport } from './routes/messages'
+import { Route as PaymentsRouteImport } from './routes/payments'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,11 @@ const MessagesRoute = MessagesRouteImport.update({
   path: '/messages',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
+  '/payments': typeof PaymentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/matches'
     | '/messages'
+    | '/payments'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/matches'
     | '/messages'
+    | '/payments'
   id:
     | '__root__'
     | '/'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/matches'
     | '/messages'
+    | '/payments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   JourneyRoute: typeof JourneyRoute
   MatchesRoute: typeof MatchesRoute
   MessagesRoute: typeof MessagesRoute
+  PaymentsRoute: typeof PaymentsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MessagesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +224,7 @@ const rootRouteChildren: RootRouteChildren = {
   JourneyRoute: JourneyRoute,
   MatchesRoute: MatchesRoute,
   MessagesRoute: MessagesRoute,
+  PaymentsRoute: PaymentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
