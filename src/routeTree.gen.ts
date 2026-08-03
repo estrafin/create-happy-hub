@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppointmentsRouteImport } from './routes/appointments'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as MessagesRouteImport } from './routes/messages'
@@ -37,6 +38,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JourneyRoute = JourneyRouteImport.update({
   id: '/journey',
   path: '/journey',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/appointments'
     | '/auth'
     | '/dashboard'
+    | '/documents'
     | '/journey'
     | '/matches'
     | '/messages'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/appointments'
     | '/auth'
     | '/dashboard'
+    | '/documents'
     | '/journey'
     | '/matches'
     | '/messages'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/appointments'
     | '/auth'
     | '/dashboard'
+    | '/documents'
     | '/journey'
     | '/matches'
     | '/messages'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AppointmentsRoute: typeof AppointmentsRoute
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
+  DocumentsRoute: typeof DocumentsRoute
   JourneyRoute: typeof JourneyRoute
   MatchesRoute: typeof MatchesRoute
   MessagesRoute: typeof MessagesRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journey': {
       id: '/journey'
       path: '/journey'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppointmentsRoute: AppointmentsRoute,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
+  DocumentsRoute: DocumentsRoute,
   JourneyRoute: JourneyRoute,
   MatchesRoute: MatchesRoute,
   MessagesRoute: MessagesRoute,
