@@ -12,7 +12,7 @@ export function CaseSelect({
 }) {
   if (cases.length <= 1) return null;
   return (
-    <Select value={value} onValueChange={onChange}>
+    <Select value={value ?? ""} onValueChange={onChange}>
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Select a case" />
       </SelectTrigger>
