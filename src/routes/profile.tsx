@@ -44,7 +44,6 @@ function num(value: string) {
 
 function ProfilePage() {
   const { user, profile, role, refresh } = useAuth();
-  const queryClient = useQueryClient();
 
   const [form, setForm] = useState({
     full_name: "",
@@ -182,7 +181,6 @@ function ProfilePage() {
         {role === "surrogate" ? <SurrogateForm userId={user?.id} /> : null}
         {role === "intended_parent" ? <ParentForm userId={user?.id} /> : null}
       </div>
-      <div className="sr-only">{queryClient ? "" : ""}</div>
     </AppShell>
   );
 }

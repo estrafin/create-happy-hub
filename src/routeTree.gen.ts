@@ -19,6 +19,7 @@ import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as VerificationRouteImport } from './routes/verification'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const PaymentsRoute = PaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerificationRoute = VerificationRouteImport.update({
   id: '/verification',
   path: '/verification',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
+  '/profile': typeof ProfileRoute
   '/verification': typeof VerificationRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
+  '/profile': typeof ProfileRoute
   '/verification': typeof VerificationRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
+  '/profile': typeof ProfileRoute
   '/verification': typeof VerificationRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/matches'
     | '/messages'
     | '/payments'
+    | '/profile'
     | '/verification'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/matches'
     | '/messages'
     | '/payments'
+    | '/profile'
     | '/verification'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/matches'
     | '/messages'
     | '/payments'
+    | '/profile'
     | '/verification'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   MatchesRoute: typeof MatchesRoute
   MessagesRoute: typeof MessagesRoute
   PaymentsRoute: typeof PaymentsRoute
+  ProfileRoute: typeof ProfileRoute
   VerificationRoute: typeof VerificationRoute
 }
 
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verification': {
       id: '/verification'
       path: '/verification'
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   MatchesRoute: MatchesRoute,
   MessagesRoute: MessagesRoute,
   PaymentsRoute: PaymentsRoute,
+  ProfileRoute: ProfileRoute,
   VerificationRoute: VerificationRoute,
 }
 export const routeTree = rootRouteImport
