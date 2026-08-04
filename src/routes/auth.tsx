@@ -158,8 +158,38 @@ function AuthPage() {
       </aside>
 
       <main className="flex items-center justify-center px-5 py-12">
+        {pendingEmail ? (
+          <div className="w-full max-w-md">
+            <h1 className="font-display text-3xl">Confirm your email</h1>
+            <p className="mt-3 text-sm text-muted-foreground">
+              We sent a confirmation link to <span className="font-medium">{pendingEmail}</span>.
+              Click it to activate your account — you can sign in and continue with verification
+              right after.
+            </p>
+            <div className="mt-6 space-y-3">
+              <Button className="w-full" onClick={handleResend} disabled={resending}>
+                {resending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Resend confirmation email
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setPendingEmail(null);
+                  setTab("signin");
+                }}
+              >
+                Back to sign in
+              </Button>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Check your spam folder if it hasn&apos;t arrived within a few minutes.
+            </p>
+          </div>
+        ) : (
         <div className="w-full max-w-md">
           <div className="mb-6 flex rounded-xl border border-border bg-card p-1">
+
             {(["signin", "signup"] as const).map((t) => (
               <button
                 key={t}
