@@ -53,6 +53,8 @@ function AuthPage() {
   const [fullName, setFullName] = useState("");
   const [role, setRole] = useState<AppRole>("intended_parent");
   const [busy, setBusy] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const [resending, setResending] = useState(false);
 
   useEffect(() => {
     if (!authLoading && session) void navigate({ to: "/dashboard" });
@@ -63,7 +65,7 @@ function AuthPage() {
     setBusy(true);
     try {
       if (tab === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -72,10 +74,28 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        toast.success("Account created — continue with verification.");
+
+        // Existing account: Supabase returns a user with no identities.
+        if (data.user && (data.user.identities?.length ?? 0) === 0) {
+          toast.info("That email is already registered — sign in instead.");
+          setTab("signin");
+          return;
+        }
+
+        // Email confirmation is on, so there is no session yet.
+        if (!data.session) {
+          setPendingEmail(email);
+          return;
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        if (error) {
+          if (/confirm/i.test(error.message)) {
+            setPendingEmail(email);
+            return;
+          }
+          throw error;
+        }
       }
       void navigate({ to: "/dashboard" });
     } catch (error) {
@@ -84,6 +104,20 @@ function AuthPage() {
       setBusy(false);
     }
   }
+
+  async function handleResend() {
+    if (!pendingEmail) return;
+    setResending(true);
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: pendingEmail,
+      options: { emailRedirectTo: `${window.location.origin}/dashboard` },
+    });
+    setResending(false);
+    if (error) toast.error(error.message);
+    else toast.success("Confirmation email sent again.");
+  }
+
 
   async function handleGoogle() {
     setBusy(true);
@@ -124,8 +158,38 @@ function AuthPage() {
       </aside>
 
       <main className="flex items-center justify-center px-5 py-12">
+        {pendingEmail ? (
+          <div className="w-full max-w-md">
+            <h1 className="font-display text-3xl">Confirm your email</h1>
+            <p className="mt-3 text-sm text-muted-foreground">
+              We sent a confirmation link to <span className="font-medium">{pendingEmail}</span>.
+              Click it to activate your account — you can sign in and continue with verification
+              right after.
+            </p>
+            <div className="mt-6 space-y-3">
+              <Button className="w-full" onClick={handleResend} disabled={resending}>
+                {resending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Resend confirmation email
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setPendingEmail(null);
+                  setTab("signin");
+                }}
+              >
+                Back to sign in
+              </Button>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Check your spam folder if it hasn&apos;t arrived within a few minutes.
+            </p>
+          </div>
+        ) : (
         <div className="w-full max-w-md">
           <div className="mb-6 flex rounded-xl border border-border bg-card p-1">
+
             {(["signin", "signup"] as const).map((t) => (
               <button
                 key={t}
@@ -227,6 +291,8 @@ function AuthPage() {
             surrogacy journey.
           </p>
         </div>
+        )}
+
       </main>
     </div>
   );
