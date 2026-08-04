@@ -146,7 +146,7 @@ function DocumentsPage() {
                         <Button
                           size="sm"
                           className="gap-1"
-                          onClick={() => sign.mutate({ id: d.id, signed_by: d.signed_by })}
+                          onClick={() => sign.mutate({ id: d.id })}
                         >
                           <PenLine className="h-3 w-3" /> Sign
                         </Button>
