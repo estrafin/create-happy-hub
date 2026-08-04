@@ -783,6 +783,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      current_user_has_role: {
+        Args: { _role: Database["public"]["Enums"]["app_role"] }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -792,6 +796,28 @@ export type Database = {
       }
       is_admin: { Args: never; Returns: boolean }
       is_case_member: { Args: { _case_id: string }; Returns: boolean }
+      sign_document: {
+        Args: { _document_id: string }
+        Returns: {
+          case_id: string | null
+          category: string
+          created_at: string
+          file_url: string | null
+          id: string
+          name: string
+          owner_id: string
+          requires_signature: boolean
+          signed_at: string | null
+          signed_by: string[] | null
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "documents"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       app_role:
