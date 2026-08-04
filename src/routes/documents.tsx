@@ -87,14 +87,11 @@ function DocumentsPage() {
   });
 
   const sign = useMutation({
-    mutationFn: async (doc: { id: string; signed_by: string[] | null }) => {
-      const signers = [...new Set([...(doc.signed_by ?? []), user!.id])];
-      const { error } = await supabase
-        .from("documents")
-        .update({ signed_by: signers, signed_at: new Date().toISOString() })
-        .eq("id", doc.id);
+    mutationFn: async (doc: { id: string }) => {
+      const { error } = await supabase.rpc("sign_document", { _document_id: doc.id });
       if (error) throw error;
     },
+
     onSuccess: () => {
       toast.success("Signature recorded");
       void queryClient.invalidateQueries({ queryKey: ["documents"] });
