@@ -291,6 +291,8 @@ function AuthPage() {
             surrogacy journey.
           </p>
         </div>
+        )}
+
       </main>
     </div>
   );
