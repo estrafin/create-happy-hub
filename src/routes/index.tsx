@@ -16,6 +16,7 @@ import {
 import heroImage from "@/assets/hero.jpg";
 import { Button } from "@/components/ui/button";
 import { JOURNEY_TEMPLATE, ROLE_BLURBS, ROLE_LABELS } from "@/lib/nestfam";
+import { SiteFooter } from "@/components/LegalLayout";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -217,13 +218,7 @@ function Landing() {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-6xl px-5 py-10 text-xs text-muted-foreground">
-        <p>
-          NestFam coordinates a surrogacy journey; it does not provide medical or legal advice.
-          Clinical and legal decisions always remain with qualified professionals. Sensitive data is
-          access-controlled, and data sharing requires explicit consent.
-        </p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
