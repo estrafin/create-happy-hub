@@ -827,6 +827,12 @@ export type Database = {
         | "lawyer"
         | "counselor"
         | "admin"
+        | "carrier"
+        | "agency_admin"
+        | "agency_staff"
+        | "professional"
+        | "clinic_staff"
+        | "nestfam_admin"
       case_status:
         | "matching"
         | "legal"
@@ -986,6 +992,12 @@ export const Constants = {
         "lawyer",
         "counselor",
         "admin",
+        "carrier",
+        "agency_admin",
+        "agency_staff",
+        "professional",
+        "clinic_staff",
+        "nestfam_admin",
       ],
       case_status: [
         "matching",
