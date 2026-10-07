@@ -1419,6 +1419,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_agency_invitation: {
+        Args: { _invitation: string }
+        Returns: string
+      }
       agency_access: {
         Args: { _agency: string; _manage?: boolean }
         Returns: boolean
@@ -1427,6 +1431,8 @@ export type Database = {
         Args: { _case: string; _domain?: string; _write?: boolean }
         Returns: boolean
       }
+      create_agency: { Args: { _name: string }; Returns: string }
+      create_agency_case: { Args: { _agency: string }; Returns: string }
       current_user_has_role: {
         Args: { _role: Database["public"]["Enums"]["app_role"] }
         Returns: boolean
@@ -1438,8 +1444,31 @@ export type Database = {
         }
         Returns: boolean
       }
+      invite_agency_member: {
+        Args: {
+          _agency: string
+          _case?: string
+          _email: string
+          _permissions?: string[]
+          _role: string
+        }
+        Returns: string
+      }
       is_admin: { Args: never; Returns: boolean }
       is_case_member: { Args: { _case_id: string }; Returns: boolean }
+      manage_agency_access: {
+        Args: { _agency: string; _entity: string; _kind: string }
+        Returns: undefined
+      }
+      record_case_assessment: {
+        Args: { _carrier: string; _case: string; _decision: string }
+        Returns: string
+      }
+      record_onboarding_role: { Args: { _role: string }; Returns: undefined }
+      record_subscription_plan: {
+        Args: { _agency: string; _plan: string }
+        Returns: undefined
+      }
       sign_document: {
         Args: { _document_id: string }
         Returns: {

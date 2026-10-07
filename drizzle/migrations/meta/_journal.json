@@ -15,6 +15,13 @@
       "when": 1791359452832,
       "tag": "0001_agency_case_management_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791359488022,
+      "tag": "0002_agency_authorization_and_actions",
+      "breakpoints": true
     }
   ]
 }
