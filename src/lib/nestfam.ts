@@ -4,20 +4,32 @@ export type AppRole = Database["public"]["Enums"]["app_role"];
 
 export const ROLE_LABELS: Record<AppRole, string> = {
   intended_parent: "Intended Parent",
-  surrogate: "Surrogate",
+  surrogate: "Carrier",
   clinic: "Fertility Clinic",
   lawyer: "Lawyer",
   counselor: "Counselor",
   admin: "Administrator",
+  carrier: "Carrier",
+  agency_admin: "Agency Admin",
+  agency_staff: "Agency Staff",
+  professional: "Professional",
+  clinic_staff: "Clinic Staff",
+  nestfam_admin: "NestFam Admin",
 };
 
 export const ROLE_BLURBS: Record<AppRole, string> = {
-  intended_parent: "Find a screened surrogate and coordinate your journey.",
-  surrogate: "Offer to carry, complete screening, get paid through escrow.",
+  intended_parent: "Coordinate a private family-building journey with your agency.",
+  surrogate: "Apply without a NestFam fee, with professional screening and support.",
   clinic: "Verify health, approve transfers, publish medical progress.",
   lawyer: "Draft contracts, collect signatures, file parentage documents.",
   counselor: "Run assessments and clear psychological readiness.",
-  admin: "Approve users, resolve disputes, release escrow funds.",
+  admin: "Oversee verification, agencies, incidents and platform safety.",
+  carrier: "Apply without a NestFam fee, with professional screening and support.",
+  agency_admin: "Create an agency, manage private cases and invite your trusted team.",
+  agency_staff: "Join your agency's team by invitation and coordinate assigned work.",
+  professional: "Join your trusted agency circles. Initially free to register.",
+  clinic_staff: "Coordinate assigned clinical appointments and records.",
+  nestfam_admin: "Oversee verification, agencies, incidents and platform safety.",
 };
 
 export const JOURNEY_TEMPLATE = [

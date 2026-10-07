@@ -12,17 +12,25 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AgencyRouteImport } from './routes/agency'
 import { Route as AppointmentsRouteImport } from './routes/appointments'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as ForAgenciesRouteImport } from './routes/for-agencies'
+import { Route as ForCarriersRouteImport } from './routes/for-carriers'
+import { Route as ForIntendedParentsRouteImport } from './routes/for-intended-parents'
+import { Route as ForProfessionalsRouteImport } from './routes/for-professionals'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as PaymentsRouteImport } from './routes/payments'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SafetyTrustRouteImport } from './routes/safety-trust'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VerificationRouteImport } from './routes/verification'
 
@@ -39,6 +47,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgencyRoute = AgencyRouteImport.update({
+  id: '/agency',
+  path: '/agency',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppointmentsRoute = AppointmentsRouteImport.update({
@@ -64,6 +77,31 @@ const DashboardRoute = DashboardRouteImport.update({
 const DocumentsRoute = DocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForAgenciesRoute = ForAgenciesRouteImport.update({
+  id: '/for-agencies',
+  path: '/for-agencies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForCarriersRoute = ForCarriersRouteImport.update({
+  id: '/for-carriers',
+  path: '/for-carriers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForIntendedParentsRoute = ForIntendedParentsRouteImport.update({
+  id: '/for-intended-parents',
+  path: '/for-intended-parents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForProfessionalsRoute = ForProfessionalsRouteImport.update({
+  id: '/for-professionals',
+  path: '/for-professionals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JourneyRoute = JourneyRouteImport.update({
@@ -96,6 +134,16 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyTrustRoute = SafetyTrustRouteImport.update({
+  id: '/safety-trust',
+  path: '/safety-trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -111,17 +159,25 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
+  '/for-agencies': typeof ForAgenciesRoute
+  '/for-carriers': typeof ForCarriersRoute
+  '/for-intended-parents': typeof ForIntendedParentsRoute
+  '/for-professionals': typeof ForProfessionalsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/resources': typeof ResourcesRoute
+  '/safety-trust': typeof SafetyTrustRoute
   '/terms': typeof TermsRoute
   '/verification': typeof VerificationRoute
 }
@@ -129,17 +185,25 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
+  '/for-agencies': typeof ForAgenciesRoute
+  '/for-carriers': typeof ForCarriersRoute
+  '/for-intended-parents': typeof ForIntendedParentsRoute
+  '/for-professionals': typeof ForProfessionalsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/resources': typeof ResourcesRoute
+  '/safety-trust': typeof SafetyTrustRoute
   '/terms': typeof TermsRoute
   '/verification': typeof VerificationRoute
 }
@@ -148,17 +212,25 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
+  '/for-agencies': typeof ForAgenciesRoute
+  '/for-carriers': typeof ForCarriersRoute
+  '/for-intended-parents': typeof ForIntendedParentsRoute
+  '/for-professionals': typeof ForProfessionalsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/journey': typeof JourneyRoute
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/payments': typeof PaymentsRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
+  '/resources': typeof ResourcesRoute
+  '/safety-trust': typeof SafetyTrustRoute
   '/terms': typeof TermsRoute
   '/verification': typeof VerificationRoute
 }
@@ -168,17 +240,25 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/agency'
     | '/appointments'
     | '/auth'
     | '/contact'
     | '/dashboard'
     | '/documents'
+    | '/for-agencies'
+    | '/for-carriers'
+    | '/for-intended-parents'
+    | '/for-professionals'
+    | '/how-it-works'
     | '/journey'
     | '/matches'
     | '/messages'
     | '/payments'
     | '/privacy'
     | '/profile'
+    | '/resources'
+    | '/safety-trust'
     | '/terms'
     | '/verification'
   fileRoutesByTo: FileRoutesByTo
@@ -186,17 +266,25 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/agency'
     | '/appointments'
     | '/auth'
     | '/contact'
     | '/dashboard'
     | '/documents'
+    | '/for-agencies'
+    | '/for-carriers'
+    | '/for-intended-parents'
+    | '/for-professionals'
+    | '/how-it-works'
     | '/journey'
     | '/matches'
     | '/messages'
     | '/payments'
     | '/privacy'
     | '/profile'
+    | '/resources'
+    | '/safety-trust'
     | '/terms'
     | '/verification'
   id:
@@ -204,17 +292,25 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/agency'
     | '/appointments'
     | '/auth'
     | '/contact'
     | '/dashboard'
     | '/documents'
+    | '/for-agencies'
+    | '/for-carriers'
+    | '/for-intended-parents'
+    | '/for-professionals'
+    | '/how-it-works'
     | '/journey'
     | '/matches'
     | '/messages'
     | '/payments'
     | '/privacy'
     | '/profile'
+    | '/resources'
+    | '/safety-trust'
     | '/terms'
     | '/verification'
   fileRoutesById: FileRoutesById
@@ -223,17 +319,25 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  AgencyRoute: typeof AgencyRoute
   AppointmentsRoute: typeof AppointmentsRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DocumentsRoute: typeof DocumentsRoute
+  ForAgenciesRoute: typeof ForAgenciesRoute
+  ForCarriersRoute: typeof ForCarriersRoute
+  ForIntendedParentsRoute: typeof ForIntendedParentsRoute
+  ForProfessionalsRoute: typeof ForProfessionalsRoute
+  HowItWorksRoute: typeof HowItWorksRoute
   JourneyRoute: typeof JourneyRoute
   MatchesRoute: typeof MatchesRoute
   MessagesRoute: typeof MessagesRoute
   PaymentsRoute: typeof PaymentsRoute
   PrivacyRoute: typeof PrivacyRoute
   ProfileRoute: typeof ProfileRoute
+  ResourcesRoute: typeof ResourcesRoute
+  SafetyTrustRoute: typeof SafetyTrustRoute
   TermsRoute: typeof TermsRoute
   VerificationRoute: typeof VerificationRoute
 }
@@ -259,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agency': {
+      id: '/agency'
+      path: '/agency'
+      fullPath: '/agency'
+      preLoaderRoute: typeof AgencyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/appointments': {
@@ -294,6 +405,41 @@ declare module '@tanstack/react-router' {
       path: '/documents'
       fullPath: '/documents'
       preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-agencies': {
+      id: '/for-agencies'
+      path: '/for-agencies'
+      fullPath: '/for-agencies'
+      preLoaderRoute: typeof ForAgenciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-carriers': {
+      id: '/for-carriers'
+      path: '/for-carriers'
+      fullPath: '/for-carriers'
+      preLoaderRoute: typeof ForCarriersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-intended-parents': {
+      id: '/for-intended-parents'
+      path: '/for-intended-parents'
+      fullPath: '/for-intended-parents'
+      preLoaderRoute: typeof ForIntendedParentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-professionals': {
+      id: '/for-professionals'
+      path: '/for-professionals'
+      fullPath: '/for-professionals'
+      preLoaderRoute: typeof ForProfessionalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journey': {
@@ -338,6 +484,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety-trust': {
+      id: '/safety-trust'
+      path: '/safety-trust'
+      fullPath: '/safety-trust'
+      preLoaderRoute: typeof SafetyTrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -359,17 +519,25 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  AgencyRoute: AgencyRoute,
   AppointmentsRoute: AppointmentsRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DocumentsRoute: DocumentsRoute,
+  ForAgenciesRoute: ForAgenciesRoute,
+  ForCarriersRoute: ForCarriersRoute,
+  ForIntendedParentsRoute: ForIntendedParentsRoute,
+  ForProfessionalsRoute: ForProfessionalsRoute,
+  HowItWorksRoute: HowItWorksRoute,
   JourneyRoute: JourneyRoute,
   MatchesRoute: MatchesRoute,
   MessagesRoute: MessagesRoute,
   PaymentsRoute: PaymentsRoute,
   PrivacyRoute: PrivacyRoute,
   ProfileRoute: ProfileRoute,
+  ResourcesRoute: ResourcesRoute,
+  SafetyTrustRoute: SafetyTrustRoute,
   TermsRoute: TermsRoute,
   VerificationRoute: VerificationRoute,
 }

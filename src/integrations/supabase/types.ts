@@ -10,10 +10,145 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
+      agencies: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          owner_id: string
+          plan: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          owner_id: string
+          plan?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          owner_id?: string
+          plan?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agencies_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agency_invitations: {
+        Row: {
+          agency_id: string
+          case_id: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          permissions: string[]
+          role: string
+          status: string
+        }
+        Insert: {
+          agency_id: string
+          case_id?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          permissions?: string[]
+          role: string
+          status?: string
+        }
+        Update: {
+          agency_id?: string
+          case_id?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          permissions?: string[]
+          role?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agency_invitations_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agency_invitations_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agency_invitations_invited_by_fkey"
+            columns: ["invited_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agency_members: {
+        Row: {
+          active: boolean
+          agency_id: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          agency_id: string
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          agency_id?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agency_members_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agency_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       appointments: {
         Row: {
           case_id: string
@@ -61,13 +196,164 @@ export type Database = {
           },
         ]
       }
+      audit_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          agency_id: string | null
+          case_id: string | null
+          created_at: string
+          entity: string
+          entity_id: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          agency_id?: string | null
+          case_id?: string | null
+          created_at?: string
+          entity: string
+          entity_id?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          agency_id?: string | null
+          case_id?: string | null
+          created_at?: string
+          entity?: string
+          entity_id?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "audit_logs_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      case_participants: {
+        Row: {
+          active: boolean
+          case_id: string
+          created_at: string
+          id: string
+          permissions: string[]
+          role: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          case_id: string
+          created_at?: string
+          id?: string
+          permissions?: string[]
+          role: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          case_id?: string
+          created_at?: string
+          id?: string
+          permissions?: string[]
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_participants_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      case_tasks: {
+        Row: {
+          assigned_to: string | null
+          case_id: string
+          created_at: string
+          created_by: string
+          due_date: string | null
+          id: string
+          status: string
+          title: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          case_id: string
+          created_at?: string
+          created_by: string
+          due_date?: string | null
+          id?: string
+          status?: string
+          title: string
+        }
+        Update: {
+          assigned_to?: string | null
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          due_date?: string | null
+          id?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_tasks_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_tasks_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_tasks_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cases: {
         Row: {
+          agency_id: string | null
+          case_manager_id: string | null
           clinic_id: string | null
           counselor_id: string | null
           created_at: string
           due_date: string | null
           id: string
+          journey_stage: string
           lawyer_id: string | null
           parent_id: string
           pregnancy_week: number | null
@@ -77,11 +363,14 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          agency_id?: string | null
+          case_manager_id?: string | null
           clinic_id?: string | null
           counselor_id?: string | null
           created_at?: string
           due_date?: string | null
           id?: string
+          journey_stage?: string
           lawyer_id?: string | null
           parent_id: string
           pregnancy_week?: number | null
@@ -91,11 +380,14 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          agency_id?: string | null
+          case_manager_id?: string | null
           clinic_id?: string | null
           counselor_id?: string | null
           created_at?: string
           due_date?: string | null
           id?: string
+          journey_stage?: string
           lawyer_id?: string | null
           parent_id?: string
           pregnancy_week?: number | null
@@ -104,47 +396,119 @@ export type Database = {
           surrogate_id?: string | null
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "cases_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cases_case_manager_id_fkey"
+            columns: ["case_manager_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      consents: {
+        Row: {
+          case_id: string | null
+          created_at: string
+          id: string
+          kind: string
+          user_id: string
+          version: string
+        }
+        Insert: {
+          case_id?: string | null
+          created_at?: string
+          id?: string
+          kind: string
+          user_id: string
+          version?: string
+        }
+        Update: {
+          case_id?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          user_id?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consents_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       documents: {
         Row: {
           case_id: string | null
           category: string
           created_at: string
+          expires_at: string | null
           file_url: string | null
           id: string
           name: string
           owner_id: string
+          previous_version_id: string | null
           requires_signature: boolean
           signed_at: string | null
           signed_by: string[] | null
+          storage_path: string | null
           updated_at: string
+          version: number
+          visibility_domain: string
         }
         Insert: {
           case_id?: string | null
           category?: string
           created_at?: string
+          expires_at?: string | null
           file_url?: string | null
           id?: string
           name: string
           owner_id: string
+          previous_version_id?: string | null
           requires_signature?: boolean
           signed_at?: string | null
           signed_by?: string[] | null
+          storage_path?: string | null
           updated_at?: string
+          version?: number
+          visibility_domain?: string
         }
         Update: {
           case_id?: string | null
           category?: string
           created_at?: string
+          expires_at?: string | null
           file_url?: string | null
           id?: string
           name?: string
           owner_id?: string
+          previous_version_id?: string | null
           requires_signature?: boolean
           signed_at?: string | null
           signed_by?: string[] | null
+          storage_path?: string | null
           updated_at?: string
+          version?: number
+          visibility_domain?: string
         }
         Relationships: [
           {
@@ -152,6 +516,13 @@ export type Database = {
             columns: ["case_id"]
             isOneToOne: false
             referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_previous_version_id_fkey"
+            columns: ["previous_version_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
             referencedColumns: ["id"]
           },
         ]
@@ -257,12 +628,134 @@ export type Database = {
           },
         ]
       }
+      financial_items: {
+        Row: {
+          amount: number
+          case_id: string
+          category: string
+          created_at: string
+          created_by: string
+          due_date: string | null
+          external_reference: string | null
+          id: string
+          label: string
+          status: string
+        }
+        Insert: {
+          amount: number
+          case_id: string
+          category: string
+          created_at?: string
+          created_by: string
+          due_date?: string | null
+          external_reference?: string | null
+          id?: string
+          label: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          case_id?: string
+          category?: string
+          created_at?: string
+          created_by?: string
+          due_date?: string | null
+          external_reference?: string | null
+          id?: string
+          label?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "financial_items_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_items_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      incidents: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string
+          detail: string | null
+          id: string
+          resolution: string | null
+          resolved_at: string | null
+          responder_id: string | null
+          severity: string
+          status: string
+          title: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by: string
+          detail?: string | null
+          id?: string
+          resolution?: string | null
+          resolved_at?: string | null
+          responder_id?: string | null
+          severity?: string
+          status?: string
+          title: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          detail?: string | null
+          id?: string
+          resolution?: string | null
+          resolved_at?: string | null
+          responder_id?: string | null
+          severity?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "incidents_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "incidents_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "incidents_responder_id_fkey"
+            columns: ["responder_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       matches: {
         Row: {
+          agency_id: string | null
+          assessment_status: string
+          case_id: string | null
           created_at: string
           id: string
           initiated_by: string | null
           parent_id: string
+          professional_decision: string | null
           rationale: string | null
           score: number
           status: Database["public"]["Enums"]["match_status"]
@@ -270,10 +763,14 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          agency_id?: string | null
+          assessment_status?: string
+          case_id?: string | null
           created_at?: string
           id?: string
           initiated_by?: string | null
           parent_id: string
+          professional_decision?: string | null
           rationale?: string | null
           score?: number
           status?: Database["public"]["Enums"]["match_status"]
@@ -281,17 +778,36 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          agency_id?: string | null
+          assessment_status?: string
+          case_id?: string | null
           created_at?: string
           id?: string
           initiated_by?: string | null
           parent_id?: string
+          professional_decision?: string | null
           rationale?: string | null
           score?: number
           status?: Database["public"]["Enums"]["match_status"]
           surrogate_id?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "matches_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       messages: {
         Row: {
@@ -524,6 +1040,47 @@ export type Database = {
           },
         ]
       }
+      professional_credentials: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          kind: string
+          reference: string | null
+          status: string
+          user_id: string
+          verification_scope: string | null
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          kind: string
+          reference?: string | null
+          status?: string
+          user_id: string
+          verification_scope?: string | null
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          kind?: string
+          reference?: string | null
+          status?: string
+          user_id?: string
+          verification_scope?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_credentials_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -624,6 +1181,76 @@ export type Database = {
             columns: ["case_id"]
             isOneToOne: false
             referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          agency_id: string
+          created_at: string
+          id: string
+          monthly_amount: number
+          plan: string
+          status: string
+        }
+        Insert: {
+          agency_id: string
+          created_at?: string
+          id?: string
+          monthly_amount?: number
+          plan?: string
+          status?: string
+        }
+        Update: {
+          agency_id?: string
+          created_at?: string
+          id?: string
+          monthly_amount?: number
+          plan?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: true
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_tickets: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          status: string
+          subject: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          status?: string
+          subject: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          status?: string
+          subject?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_tickets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -745,36 +1372,45 @@ export type Database = {
       verifications: {
         Row: {
           created_at: string
+          expires_at: string | null
           file_url: string | null
           id: string
           kind: string
           reference: string | null
           reviewer_notes: string | null
           status: Database["public"]["Enums"]["kyc_status"]
+          storage_path: string | null
           updated_at: string
           user_id: string
+          verification_scope: string | null
         }
         Insert: {
           created_at?: string
+          expires_at?: string | null
           file_url?: string | null
           id?: string
           kind: string
           reference?: string | null
           reviewer_notes?: string | null
           status?: Database["public"]["Enums"]["kyc_status"]
+          storage_path?: string | null
           updated_at?: string
           user_id: string
+          verification_scope?: string | null
         }
         Update: {
           created_at?: string
+          expires_at?: string | null
           file_url?: string | null
           id?: string
           kind?: string
           reference?: string | null
           reviewer_notes?: string | null
           status?: Database["public"]["Enums"]["kyc_status"]
+          storage_path?: string | null
           updated_at?: string
           user_id?: string
+          verification_scope?: string | null
         }
         Relationships: []
       }
@@ -783,6 +1419,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_agency_invitation: {
+        Args: { _invitation: string }
+        Returns: string
+      }
+      agency_access: {
+        Args: { _agency: string; _manage?: boolean }
+        Returns: boolean
+      }
+      case_access: {
+        Args: { _case: string; _domain?: string; _write?: boolean }
+        Returns: boolean
+      }
+      create_agency: { Args: { _name: string }; Returns: string }
+      create_agency_case: { Args: { _agency: string }; Returns: string }
       current_user_has_role: {
         Args: { _role: Database["public"]["Enums"]["app_role"] }
         Returns: boolean
@@ -794,22 +1444,50 @@ export type Database = {
         }
         Returns: boolean
       }
+      invite_agency_member: {
+        Args: {
+          _agency: string
+          _case?: string
+          _email: string
+          _permissions?: string[]
+          _role: string
+        }
+        Returns: string
+      }
       is_admin: { Args: never; Returns: boolean }
       is_case_member: { Args: { _case_id: string }; Returns: boolean }
+      manage_agency_access: {
+        Args: { _agency: string; _entity: string; _kind: string }
+        Returns: undefined
+      }
+      record_case_assessment: {
+        Args: { _carrier: string; _case: string; _decision: string }
+        Returns: string
+      }
+      record_onboarding_role: { Args: { _role: string }; Returns: undefined }
+      record_subscription_plan: {
+        Args: { _agency: string; _plan: string }
+        Returns: undefined
+      }
       sign_document: {
         Args: { _document_id: string }
         Returns: {
           case_id: string | null
           category: string
           created_at: string
+          expires_at: string | null
           file_url: string | null
           id: string
           name: string
           owner_id: string
+          previous_version_id: string | null
           requires_signature: boolean
           signed_at: string | null
           signed_by: string[] | null
+          storage_path: string | null
           updated_at: string
+          version: number
+          visibility_domain: string
         }
         SetofOptions: {
           from: "*"
@@ -827,6 +1505,12 @@ export type Database = {
         | "lawyer"
         | "counselor"
         | "admin"
+        | "carrier"
+        | "agency_admin"
+        | "agency_staff"
+        | "professional"
+        | "clinic_staff"
+        | "nestfam_admin"
       case_status:
         | "matching"
         | "legal"
@@ -986,6 +1670,12 @@ export const Constants = {
         "lawyer",
         "counselor",
         "admin",
+        "carrier",
+        "agency_admin",
+        "agency_staff",
+        "professional",
+        "clinic_staff",
+        "nestfam_admin",
       ],
       case_status: [
         "matching",

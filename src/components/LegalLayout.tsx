@@ -18,13 +18,19 @@ export function SiteFooter() {
             <span className="font-display text-lg">NestFam</span>
           </div>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-            Coordinated, protected surrogacy journeys — screening, contracts, clinical milestones and
-            escrow-only payments in one place.
+            The trusted infrastructure for family building. Private coordination for agencies,
+            families and qualified professionals across Africa.
           </p>
         </div>
         <nav className="text-sm">
           <p className="font-medium">Platform</p>
           <ul className="mt-3 space-y-2 text-muted-foreground">
+            <li><Link to="/how-it-works" className="hover:text-foreground">How it works</Link></li>
+            <li><Link to="/for-agencies" className="hover:text-foreground">For agencies</Link></li>
+            <li><Link to="/for-intended-parents" className="hover:text-foreground">For intended parents</Link></li>
+            <li><Link to="/for-carriers" className="hover:text-foreground">For carriers</Link></li>
+            <li><Link to="/for-professionals" className="hover:text-foreground">For professionals</Link></li>
+            <li><Link to="/resources" className="hover:text-foreground">Resources</Link></li>
             <li>
               <Link to="/about" className="hover:text-foreground">
                 About us
@@ -45,6 +51,7 @@ export function SiteFooter() {
         <nav className="text-sm">
           <p className="font-medium">Legal</p>
           <ul className="mt-3 space-y-2 text-muted-foreground">
+            <li><Link to="/safety-trust" className="hover:text-foreground">Safety & trust</Link></li>
             <li>
               <Link to="/privacy" className="hover:text-foreground">
                 Privacy policy
@@ -77,7 +84,7 @@ export function SiteFooter() {
       </div>
       <div className="mx-auto max-w-6xl px-5 pb-10 text-xs text-muted-foreground">
         <p>
-          © {new Date().getFullYear()} NestFam. NestFam coordinates a surrogacy journey; it does not
+          © {new Date().getFullYear()} NestFam. NestFam coordinates family-building journeys; it does not
           provide medical or legal advice. Clinical and legal decisions always remain with qualified
           professionals.
         </p>

@@ -62,8 +62,8 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.972 0.014 88);
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.004 100);
   --foreground: oklch(0.255 0.035 156);
   --card: oklch(0.992 0.007 88);
   --card-foreground: oklch(0.255 0.035 156);
@@ -153,7 +153,7 @@
   .font-display {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.015em;
+    letter-spacing: 0;
   }
 }
 
@@ -169,7 +169,15 @@
 }
 
 @utility grain-hero {
-  background-image:
-    radial-gradient(120% 90% at 85% 0%, oklch(0.665 0.132 47 / 0.16) 0%, transparent 55%),
-    radial-gradient(90% 80% at 10% 100%, oklch(0.345 0.058 158 / 0.14) 0%, transparent 60%);
+  background-color: var(--secondary);
+}
+
+.home-hero { min-height: 640px; }
+.home-hero-image { object-position: center; }
+.home-hero-veil { background: linear-gradient(90deg, var(--background) 0%, color-mix(in oklch, var(--background) 92%, transparent) 32%, color-mix(in oklch, var(--background) 35%, transparent) 55%, transparent 72%); }
+@media(max-width: 767px) {
+  .home-hero { min-height: 740px; }
+  .home-hero-image { object-position: 68% bottom; height: 48%; top: auto; }
+  .home-hero-veil { background: linear-gradient(180deg, var(--background) 0%, var(--background) 51%, color-mix(in oklch, var(--background) 70%, transparent) 60%, transparent 75%); }
+  .home-hero > div:last-child { padding-bottom: 320px; }
 }
