@@ -8,6 +8,13 @@
       "when": 1791359400304,
       "tag": "0000_extend_family_building_roles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791359452832,
+      "tag": "0001_agency_case_management_foundation",
+      "breakpoints": true
     }
   ]
 }
