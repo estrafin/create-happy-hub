@@ -11,7 +11,7 @@ export const agencyAction=createServerFn({method:'POST'}).middleware([requireSup
   z.object({action:z.literal('plan'),agencyId:z.string().uuid(),plan:z.enum(['starter','professional','growth','enterprise'])}),
 ]).parse(input)).handler(async({data,context})=>{
   const db=context.supabase;
-  const result=data.action==='create'?await db.rpc('create_agency',{_name:data.name}):data.action==='case'?await db.rpc('create_agency_case',{_agency:data.agencyId}):data.action==='accept'?await db.rpc('accept_agency_invitation',{_invitation:data.invitationId}):data.action==='invite'?await db.rpc('invite_agency_member',{_agency:data.agencyId,_email:data.email,_role:data.role,_case:data.caseId,_permissions:data.permissions}):data.action==='revoke'?await db.rpc('manage_agency_access',{_agency:data.agencyId,_entity:data.entityId,_kind:data.kind}):await db.rpc('record_subscription_plan',{_agency:data.agencyId,_plan:data.plan});
+  const result=data.action==='create'?await db.rpc('create_agency',{_name:data.name}):data.action==='case'?await db.rpc('create_agency_case',{_agency:data.agencyId}):data.action==='accept'?await db.rpc('accept_agency_invitation',{_invitation:data.invitationId}):data.action==='invite'?await db.rpc('invite_agency_member',{_agency:data.agencyId,_email:data.email,_role:data.role,...(data.caseId?{_case:data.caseId}:{}),_permissions:data.permissions}):data.action==='revoke'?await db.rpc('manage_agency_access',{_agency:data.agencyId,_entity:data.entityId,_kind:data.kind}):await db.rpc('record_subscription_plan',{_agency:data.agencyId,_plan:data.plan});
   if(result.error)throw new Error(result.error.message);
   return {id:typeof result.data==='string'?result.data:null};
 });
