@@ -15,6 +15,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AgencyRouteImport } from './routes/agency'
 import { Route as AppointmentsRouteImport } from './routes/appointments'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CaseWorkspaceRouteImport } from './routes/case-workspace'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DocumentsRouteImport } from './routes/documents'
@@ -62,6 +63,11 @@ const AppointmentsRoute = AppointmentsRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseWorkspaceRoute = CaseWorkspaceRouteImport.update({
+  id: '/case-workspace',
+  path: '/case-workspace',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
+  '/case-workspace': typeof CaseWorkspaceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
+  '/case-workspace': typeof CaseWorkspaceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/agency': typeof AgencyRoute
   '/appointments': typeof AppointmentsRoute
   '/auth': typeof AuthRoute
+  '/case-workspace': typeof CaseWorkspaceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/agency'
     | '/appointments'
     | '/auth'
+    | '/case-workspace'
     | '/contact'
     | '/dashboard'
     | '/documents'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/agency'
     | '/appointments'
     | '/auth'
+    | '/case-workspace'
     | '/contact'
     | '/dashboard'
     | '/documents'
@@ -295,6 +306,7 @@ export interface FileRouteTypes {
     | '/agency'
     | '/appointments'
     | '/auth'
+    | '/case-workspace'
     | '/contact'
     | '/dashboard'
     | '/documents'
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   AgencyRoute: typeof AgencyRoute
   AppointmentsRoute: typeof AppointmentsRoute
   AuthRoute: typeof AuthRoute
+  CaseWorkspaceRoute: typeof CaseWorkspaceRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DocumentsRoute: typeof DocumentsRoute
@@ -384,6 +397,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-workspace': {
+      id: '/case-workspace'
+      path: '/case-workspace'
+      fullPath: '/case-workspace'
+      preLoaderRoute: typeof CaseWorkspaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgencyRoute: AgencyRoute,
   AppointmentsRoute: AppointmentsRoute,
   AuthRoute: AuthRoute,
+  CaseWorkspaceRoute: CaseWorkspaceRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DocumentsRoute: DocumentsRoute,
